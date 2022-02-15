@@ -1,5 +1,5 @@
 
-![Kade Engine logo](assets/preload/images/KadeEngineLogo.png)
+![CrispyFriesBanner](art/readme/CrispyFriesBanner.png)
 
 # Friday Night Funkin': Vs Crispyfries
 ## Friday Night Funkin'
@@ -9,8 +9,6 @@ Links: **[itch.io page](https://ninja-muffin24.itch.io/funkin) ⋅ [Newgrounds](
 > Uh oh! Your tryin to kiss ur hot girlfriend, but her MEAN and EVIL dad is trying to KILL you! He's an ex-rockstar, the only way to get to his heart? The power of music... 
 
 ## Vs Crispyfries
-
-![CrispyFriesBanner](art/readme/CrispyFriesBanner.png)
 
 **FNF: Vs Crispyfries** is a mod for Kade Engine! Featuring my friend Crispyfries rap battling with boyfriend in the void!
 
