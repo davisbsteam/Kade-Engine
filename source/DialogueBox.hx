@@ -138,7 +138,6 @@ class DialogueBox extends FlxSpriteGroup
 		add(box);
 
 		box.screenCenter(X);
-		portraitLeft.screenCenter();
 
 
 		//Text stuff
@@ -174,13 +173,14 @@ class DialogueBox extends FlxSpriteGroup
 
 	override function update(elapsed:Float)
 	{
+		if (PlayState.SONG.song.toLowerCase() == 'roses' || PlayState.SONG.song.toLowerCase() == 'thorns')
+			portraitLeft.visible = false;
+
 		if (PlayState.SONG.song.toLowerCase() == 'thorns')
 		{
 			swagDialogue.color = FlxColor.WHITE;
 			dropText.color = FlxColor.BLACK;
 		}
-
-		portraitLeft.visible = false;
 
 		dropText.text = swagDialogue.text;
 

@@ -376,6 +376,8 @@ class TitleState extends MusicBeatState
 				addMoreText(curWacky[1]);
 			case 12:
 				deleteCoolText();
+			case 13:
+				addMoreText('Friday Night Funkin');
 			case 14:
 				addMoreText('Vs.');
 			case 15:
