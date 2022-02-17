@@ -1145,33 +1145,7 @@ class PlayState extends MusicBeatState
 			switch (StringTools.replace(curSong, " ", "-").toLowerCase())
 			{
 				case "winter-horrorland":
-					var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
-					add(blackScreen);
-					blackScreen.scrollFactor.set();
-					camHUD.visible = false;
-
-					new FlxTimer().start(0.1, function(tmr:FlxTimer)
-					{
-						remove(blackScreen);
-						FlxG.sound.play(Paths.sound('Lights_Turn_On'));
-						camFollow.y = -2050;
-						camFollow.x += 200;
-						FlxG.camera.focusOn(camFollow.getPosition());
-						FlxG.camera.zoom = 1.5;
-
-						new FlxTimer().start(0.8, function(tmr:FlxTimer)
-						{
-							camHUD.visible = true;
-							remove(blackScreen);
-							FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 2.5, {
-								ease: FlxEase.quadInOut,
-								onComplete: function(twn:FlxTween)
-								{
-									startCountdown();
-								}
-							});
-						});
-					});
+					mallIntro();
 				case 'senpai':
 					schoolIntro(doof);
 				case 'roses':
@@ -1187,13 +1161,6 @@ class PlayState extends MusicBeatState
 		{
 			switch (curSong.toLowerCase())
 			{
-				case 'senpai':
-					schoolIntro(doof);
-				case 'roses':
-					FlxG.sound.play(Paths.sound('ANGRY'));
-					schoolIntro(doof);
-				case 'thorns':
-					schoolIntro(doof);
 				default:
 					startCountdown();
 			}
@@ -1205,6 +1172,66 @@ class PlayState extends MusicBeatState
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, handleInput);
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, releaseInput);
 		super.create();
+	}
+
+	function mallIntro():Void
+	{
+		var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+		add(blackScreen);
+		blackScreen.scrollFactor.set();
+		camHUD.visible = false;
+
+		new FlxTimer().start(0.1, function(tmr:FlxTimer)
+		{
+			remove(blackScreen);
+			FlxG.sound.play(Paths.sound('Lights_Turn_On'));
+			camFollow.y = -2050;
+			camFollow.x += 200;
+			FlxG.camera.focusOn(camFollow.getPosition());
+			FlxG.camera.zoom = 1.5;
+
+			new FlxTimer().start(0.8, function(tmr:FlxTimer)
+			{
+				camHUD.visible = true;
+				remove(blackScreen);
+				FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 2.5, {
+					ease: FlxEase.quadInOut,
+					onComplete: function(twn:FlxTween)
+					{
+						startCountdown();
+					}
+				});
+			});
+		});
+	}
+
+	function dialogueIntro(?dialogueBox:DialogueBox):Void
+	{
+		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+		black.scrollFactor.set();
+		add(black);
+
+		new FlxTimer().start(0.3, function(tmr:FlxTimer)
+		{
+			black.alpha -= 0.15;
+
+			if (black.alpha > 0)
+			{
+				tmr.reset(0.3);
+			}
+			else
+			{
+				if (dialogueBox != null)
+				{
+					inCutscene = true;
+					add(dialogueBox);
+				}
+				else
+					startCountdown();
+
+				remove(black);
+			}
+		});
 	}
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
