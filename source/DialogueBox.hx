@@ -138,7 +138,7 @@ class DialogueBox extends FlxSpriteGroup
 		add(box);
 
 		box.screenCenter(X);
-		portraitLeft.screenCenter(X);
+		portraitLeft.screenCenter();
 
 
 		//Text stuff
@@ -257,14 +257,14 @@ class DialogueBox extends FlxSpriteGroup
 		switch (curCharacter)
 		{
 			case 'senpai':
-				portraitRight.visible = false;
+				hideOtherPortraits(portraitLeft);
 				if (!portraitLeft.visible)
 				{
 					portraitLeft.visible = true;
 					portraitLeft.animation.play('enter');
 				}
 			case 'bf-pixel':
-				portraitLeft.visible = false;
+				hideOtherPortraits(portraitRight);
 				if (!portraitRight.visible)
 				{
 					portraitRight.visible = true;
