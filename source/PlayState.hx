@@ -45,7 +45,7 @@ import flixel.graphics.atlas.FlxAtlas;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
+import flixel.math.FlxPoint; 
 import flixel.math.FlxRect;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
@@ -376,31 +376,8 @@ class PlayState extends MusicBeatState
 			+ Conductor.timeScale + '\nBotPlay : ' + PlayStateChangeables.botPlay);
 
 		// dialogue shit
-		switch (songLowercase)
-		{
-			case 'tutorial':
-				dialogue = ["Hey you're pretty cute.", 'Use the arrow keys to keep up \nwith me singing.'];
-			case 'bopeebo':
-				dialogue = [
-					'HEY!',
-					"You think you can just sing\nwith my daughter like that?",
-					"If you want to date her...",
-					"You're going to have to go \nthrough ME first!"
-				];
-			case 'fresh':
-				dialogue = ["Not too shabby boy.", ""];
-			case 'dadbattle':
-				dialogue = [
-					"gah you think you're hot stuff?",
-					"If you can beat me here...",
-					"Only then I will even CONSIDER letting you\ndate my daughter!"
-				];
-			case 'senpai':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('data/senpai/senpaiDialogue'));
-			case 'roses':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('data/roses/rosesDialogue'));
-			case 'thorns':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('data/thorns/thornsDialogue'));
+		if (songLowercase == 'senpai' || songLowercase == 'roses' || songLowercase == 'thorns') {
+			dialogue = CoolUtil.coolTextFile(Paths.dialoguefile(songLowercase + '/' + songLowercase + 'Dialogue'));
 		}
 
 		// defaults if no stage was found in chart
@@ -800,6 +777,17 @@ class PlayState extends MusicBeatState
 						stageCurtains.active = false;
 
 						add(stageCurtains);
+					}
+				case 'void':
+					{
+						defaultCamZoom = 0.9;
+						curStage = 'void';
+						var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(4000, 4000, FlxColor.WHITE);
+						bg.screenCenter();
+						bg.active = false;
+						bg.scrollFactor.set();
+						
+						add(bg);
 					}
 				default:
 					{
@@ -3695,7 +3683,6 @@ class PlayState extends MusicBeatState
 		FlxG.stage.window.onFocusIn.add(focusIn);
 
 		var ourSource:String = "assets/videos/daWeirdVid/dontDelete.webm";
-		WebmPlayer.SKIP_STEP_LIMIT = 90;
 		var str1:String = "WEBM SHIT";
 		webmHandler = new WebmHandler();
 		webmHandler.source(ourSource);

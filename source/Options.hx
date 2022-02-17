@@ -866,3 +866,24 @@ class ResetSettings extends Option
 		return confirm ? "Confirm Settings Reset" : "Reset Settings";
 	}
 }
+// class WatermarkOption extends Option
+// {
+// 	public function new(desc:String)
+// 	{
+// 		super();
+// 		description = desc;
+// 	}
+
+// 	public override function press():Bool
+// 	{
+// 		Main.watermarks = !Main.watermarks;
+// 		FlxG.save.data.watermark = Main.watermarks;
+// 		display = updateDisplay();
+// 		return true;
+// 	}
+
+// 	private override function updateDisplay():String
+// 	{
+// 		return "Watermarks " + (Main.watermarks ? "on" : "off");
+// 	}
+// }
